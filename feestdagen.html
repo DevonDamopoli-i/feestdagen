@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Feestdagen</title>
+</head>
+<body>
+
+<h2>Eerstvolgende feestdagen</h2>
+
+<div id="Holidays"></div>
+
+<script>
+
+fetch("https://date.nager.at/api/v3/NextPublicHolidays/NL")
+.then(response => response.json())
+.then(data => {
+
+    const holidaysDiv = document.getElementById("Holidays");
+
+    let html = "<ul>";
+
+    data.forEach(holiday => {
+        html += `
+            <li>
+                ${holiday.date} - ${holiday.localName}
+            </li>
+        `;
+    });
+
+    html += "</ul>";
+
+    holidaysDiv.innerHTML = html;
+
+})
+.catch(error => console.log(error));
+
+</script>
+
+</body>
+</html>
